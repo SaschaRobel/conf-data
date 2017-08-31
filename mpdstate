@@ -1,0 +1,85 @@
+sw_volume: 100
+audio_device_state:1:Alsa for audio sound card
+audio_device_state:1:my_fifo
+state: stop
+current: 2
+random: 0
+repeat: 0
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0.000000
+mixrampdelay: -1.000000
+playlist_begin
+0:Aesop Rock/Bazooka Tooth/01 - Bazooka Tooth.mp3
+1:Aesop Rock/Bazooka Tooth/02 - N.Y. Electric (Hunter Interlud.mp3
+2:Aesop Rock/Bazooka Tooth/03 - Easy.mp3
+3:Aesop Rock/Bazooka Tooth/04 - No Jumper Cables.mp3
+4:Aesop Rock/Bazooka Tooth/05 - Limelighters (Flunkadelic Inte.mp3
+5:Aesop Rock/Bazooka Tooth/06 - Super Fluke.mp3
+6:Aesop Rock/Bazooka Tooth/07 - Cook It Up.mp3
+7:Aesop Rock/Bazooka Tooth/08 - Freeze (Honeycomb Interlude).mp3
+8:Aesop Rock/Bazooka Tooth/09 - We're Famous.mp3
+9:Aesop Rock/Bazooka Tooth/10 - Babies With Guns.mp3
+10:Aesop Rock/Bazooka Tooth/11 - The Greatest Pac-Man Victory i.mp3
+11:Aesop Rock/Bazooka Tooth/12 - Frijoles.mp3
+12:Aesop Rock/Bazooka Tooth/13 - 1135 (Ketamine U.S.A. Interlu.mp3
+13:Aesop Rock/Bazooka Tooth/14 - Kill the Messenger.mp3
+14:Aesop Rock/Bazooka Tooth/15 - Mars Attacks.mp3
+15:Aesop Rock/Float/aesop rock - float - 01 - float.mp3
+16:Aesop Rock/Float/aesop rock - float - 02 - commencement at the obedience academy.mp3
+17:Aesop Rock/Float/aesop rock - float - 03 - big bang.mp3
+18:Aesop Rock/Float/aesop rock - float - 04 - garbage.mp3
+19:Aesop Rock/Float/aesop rock - float - 05 - ill be ok feat slug.mp3
+20:Aesop Rock/Float/aesop rock - float - 06 - breakfast with blockhead.mp3
+21:Aesop Rock/Float/aesop rock - float - 07 - basic cable.mp3
+22:Aesop Rock/Float/aesop rock - float - 08 - fascination.mp3
+23:Aesop Rock/Float/aesop rock - float - 09 - oxygen.mp3
+24:Aesop Rock/Float/aesop rock - float - 10 - skip town.mp3
+25:Aesop Rock/Float/aesop rock - float - 11 - 6b panorama.mp3
+26:Aesop Rock/Float/aesop rock - float - 12 - lunch with blockhead.mp3
+27:Aesop Rock/Float/aesop rock - float - 13 - spare a match.mp3
+28:Aesop Rock/Float/aesop rock - float - 14 -  attention span.mp3
+29:Aesop Rock/Float/aesop rock - float - 15 - how to be a carpenter.mp3
+30:Aesop Rock/Float/aesop rock - float - 16 - prosperity.mp3
+31:Aesop Rock/Float/aesop rock - float - 17 - no spash.mp3
+32:Aesop Rock/Float/aesop rock - float - 18 - drawbridge.mp3
+33:Aesop Rock/Float/aesop rock - float - 19 - dinner with blockhead.mp3
+34:Aesop Rock/Float/aesop rock - float - 20 - the mayor and the crook.mp3
+35:Aesop Rock/Labor Days/01 - Labor.mp3
+36:Aesop Rock/Labor Days/02 - Daylight.mp3
+37:Aesop Rock/Labor Days/03 - Save Yourself.mp3
+38:Aesop Rock/Labor Days/04 - Flashflood.mp3
+39:Aesop Rock/Labor Days/05 - No Regrets.mp3
+40:Aesop Rock/Labor Days/06 - One Brick.mp3
+41:Aesop Rock/Labor Days/07 - The Tugboat Complex, Pt. 3.mp3
+42:Aesop Rock/Labor Days/08 - Coma.mp3
+43:Aesop Rock/Labor Days/09 - Battery.mp3
+44:Aesop Rock/Labor Days/10 - Boombox.mp3
+45:Aesop Rock/Labor Days/11 - Bent Life.mp3
+46:Aesop Rock/Labor Days/12 - The Yes and the Y'all.mp3
+47:Aesop Rock/Labor Days/13 - 9-5ers Anthem.mp3
+48:Aesop Rock/None Shall Pass/01 - aesop rock - none shall pass - keep off the lawn.mp3
+49:Aesop Rock/None Shall Pass/02 - aesop rock - none shall pass - none shall pass.mp3
+50:Aesop Rock/None Shall Pass/03 - aesop rock - none shall pass - catacomb kids.mp3
+51:Aesop Rock/None Shall Pass/04 - aesop rock - none shall pass - bring back pluto.mp3
+52:Aesop Rock/None Shall Pass/05 - aesop rock - none shall pass - fumes.mp3
+53:Aesop Rock/None Shall Pass/06 - aesop rock - none shall pass - getaway car (feat. cage and breeze brewin).mp3
+54:Aesop Rock/None Shall Pass/07 - aesop rock - none shall pass - 39 thieves.mp3
+55:Aesop Rock/None Shall Pass/08 - aesop rock - none shall pass - the harbor is yours.mp3
+56:Aesop Rock/None Shall Pass/09 - aesop rock - none shall pass - citronella.mp3
+57:Aesop Rock/None Shall Pass/10 - aesop rock - none shall pass - gun for the whole family (feat. el-p).mp3
+58:Aesop Rock/None Shall Pass/11 - aesop rock - none shall pass - five fingers.mp3
+59:Aesop Rock/None Shall Pass/12 - aesop rock - none shall pass - no city.mp3
+60:Aesop Rock/None Shall Pass/13 - aesop rock - none shall pass - dark heart news (feat. rob sonic).mp3
+61:Aesop Rock/None Shall Pass/14 - aesop rock - none shall pass - coffee (feat. john darnielle).mp3
+62:Aesop Rock/None Shall Pass/15 - aesop rock - none shall pass - pigs.mp3
+63:Aesop Rock/Daylight EP/01 - Daylight.mp3
+64:Aesop Rock/Daylight EP/02 - Night Light.mp3
+65:Aesop Rock/Daylight EP/03 - Nickle Plated Pockets.mp3
+66:Aesop Rock/Daylight EP/04 - Alchemy (feat  Blueprint).mp3
+67:Aesop Rock/Daylight EP/05 - Forest Crunk.mp3
+68:Aesop Rock/Daylight EP/06 - Bracket Basher.mp3
+69:Aesop Rock/Daylight EP/07 - Maintenance.mp3
+70:Aesop Rock/Daylight EP/08 - One Of Four (hidden track).mp3
+playlist_end
