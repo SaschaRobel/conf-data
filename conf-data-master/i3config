@@ -1,0 +1,154 @@
+
+# config dual desktop
+exec_always --no-startup-id xset s off
+exec_always --no-startup-id xset -dpms
+exec_always --no-startup-id xrandr --output HDMI1 --auto --left-of LVDS1 --auto
+exec_always --no-startup-id redshift
+# config polybar
+exec_always --no-startup-id nm-applet
+
+### start autostart programms 
+#
+#
+# config background image
+exec_always --no-startup-id feh --bg-scale /home/sascha/Hintergrund/Background.png
+
+# start runpass
+
+exec_always --no-startup-id /opt/Enpass/runenpass.sh
+for_window [class="(?i)Enpass"] move workspace 10
+# start mpd and ncmpcpp
+
+exec --no-startup-id urxvt -e ncmpcpp
+exec --no-startup-id mpd
+
+# workaround automount ... 
+exec --no-startup-id thunar
+for_window [class="(?i)Thunar"] move workspace 10
+
+#start emailprogramm 
+exec --no-startup-id evolution
+for_window [class="(?i)Evolution"] move scratchpad
+# start nm aplet
+#
+# need to do for notebook
+#
+#
+#
+## end autostart programms
+
+## move all windows to scratchpad 
+#
+# set mod
+
+set $mod Mod1
+
+font pango:monospace 8
+floating_modifier $mod
+bindsym $mod+Return exec urxvt
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec dmenu_run
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+odiaeresis focus right
+bindsym $mod+a focus parent
+
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+odiaeresis move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+h split horizontal
+bindsym $mod+v split vertical
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+space focus mode_toggle
+
+# move all floating windows to the scratchpad
+
+bindsym $mod+x move scratchpad
+bindsym $mod+Shift+x scratchpad show
+
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+mode "resize" {
+
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym odiaeresis resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+new_window pixel 0
+new_float normal  0
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #65C9ED #65C9ED #C0E9F8 #041A22	  #041A22
+client.focused_inactive #041A22 #041A22 #FFFFFF #041A22   #041A22 
+client.unfocused        #041A22 #041A22 #C0E9F8 #041A22   #041A22 
+client.urgent           #041A22 #041A22 #C0E9F8 #041A22   #041A22 
+client.placeholder      #041A22 #041A22 #C0E9F8 #041A22   #041A22
+
+
+
+exec_always --no-startup-id /home/sascha/.config/polybar/launch.sh
+
+
+
+
+
+
+
+

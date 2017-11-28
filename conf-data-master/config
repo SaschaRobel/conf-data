@@ -1,154 +1,505 @@
+;
+;   this is mine
+;=====================================================
 
-# config dual desktop
-
-exec_always --no-startup-id xrandr --output DVI-I-0 --auto  --right-of HDMI-0 --output HDMI-0 --auto
-
-# config polybar
-
-exec_always --no-startup-id /home/sascha/.config/polybar/launch.sh
-
-
-### start autostart programms 
-#
-#
-# config background image
-exec --no-startup-id feh --bg-scale /home/sascha/Hintergrund/Background.png
-
-# start runpass
-
-exec ./Enpass/runenpass.sh
-for_window [class="(?i)Enpass"] move workspace 10
-# start mpd and ncmpcpp
-
-exec --no-startup-id urxvt -e ncmpcpp
-exec --no-startup-id mpd
-
-# workaround automount ... 
-exec --no-startup-id thunar
-for_window [class="(?i)Thunar"] move workspace 10
-
-#start emailprogramm 
-exec --no-startup-id evolution
-for_window [class="(?i)Evolution"] move scratchpad
-# start nm aplet
-#
-# need to do for notebook
-#
-#
-#
-## end autostart programms
-
-## move all windows to scratchpad 
-#
-# set mod
-
-set $mod Mod1
-
-font pango:monospace 8
-floating_modifier $mod
-bindsym $mod+Return exec urxvt
-bindsym $mod+Shift+q kill
-bindsym $mod+d exec dmenu_run
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
-bindsym $mod+a focus parent
+[colors]
+;background = ${xrdb:color0:#222}
+background = #222
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
 
 
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+[bar/main]
+; Use the following command to list available outputs:
+; If unspecified, the application will pick the first one it finds.
+; $ xrandr -q | grep " connected" | cut -d ' ' -f1
+MONITOR = ${xrandr -q | grep 'HDMI1\|VGA-1' | cut -d ' ' -f1}
+monitor = ${env:MONITOR:LVDS1}
+; Require the monitor to be in connected state
+; XRandR sometimes report my monitor as being disconnected (when in use)
+monitor-strict = false
 
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+; Tell the Window Manager not to configure the window.
+; Use this to detach the bar if your WM is locking its size/position.
+;override-redirect = false
 
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-bindsym $mod+h split horizontal
-bindsym $mod+v split vertical
-bindsym $mod+f fullscreen toggle
+; Put the bar at the bottom of the screen
+bottom = false
 
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+; Prefer fixed center position for the `modules-center` block
+; When false, the center position will be based on the size of the other blocks.
+fixed-center = true
 
-bindsym $mod+Shift+space floating toggle
+; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+width = 100%
+height = 20
 
-bindsym $mod+space focus mode_toggle
+; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+offset-x = 0
+offset-y = 0
 
-# move all floating windows to the scratchpad
+; Background argb color (e.g. #f00, #ff992a, #ddff1023)
+background = ${colors.background}
 
-bindsym $mod+x move scratchpad
-bindsym $mod+Shift+x scratchpad show
+; Foreground argb color (e.g. #f00, #ff992a, #ddff1023)
+foreground = ${colors.foreground}
+
+; Value used for drawing rounded corners
+; Individual top/bottom values can be defined using:
+;   radius-{top,bottom}
+radius = 0.0
+
+; Under-/overline pixel size and argb color
+; Individual values can be defined using:
+;   {overline,underline}-size
+;   {overline,underline}-color
+line-size = 3 
+line-color = #f00
+
+; Values applied to all borders
+; Individual side values can be defined using:
+;   border-{left,top,right,bottom}-size
+;   border-{left,top,right,bottom}-color
+border-size = 0
+border-color = #000000
+
+; Number of spaces to add at the beginning/end of the bar
+; Individual side values can be defined using:
+; padding-{left,right}
+padding-left = 0
+padding-right = 0
+; Number of spaces to add before/after each module
+; Individual side values can be defined using:
+;   module-margin-{left,right}
+module-margin-left = 0
+module-margin-right = 0
+
+; Fonts are defined using <font-name>;<vertical-offset>
+; Font names are specified using a fontconfig pattern.
+;   font-0 = NotoSans-Regular:size=8;2
+;   font-1 = MaterialIcons:size=10
+;   font-2 = Termsynu:size=8;-1
+;   font-3 = FontAwesome:size=10
+; See the Fonts wiki page for more details
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+
+; Modules are added to one of the available blocks
+
+modules-left = i3
+modules-center = mpd xwindow
+modules-right = xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+
+; The separator will be inserted between the output of each module
+separator =
+
+; This value is used to add extra spacing between elements
+; @deprecated: This parameter will be removed in an upcoming version
+;spacing =0 
+
+; Opacity value between 0.0 and 1.0 used on fade in/out
+dim-value = 1.0
+
+; Value to be used to set the WM_NAME atom
+; If the value is empty or undefined, the atom value
+; will be created from the following template: polybar-[BAR]_[MONITOR]
+; NOTE: The placeholders are not available for custom values
+wm-name = i3
+
+; Locale used to localize various module data (e.g. date)
+; Expects a valid libc locale, for example: sv_SE.UTF-8
+;locale = 
+
+; Position of the system tray window
+; If empty or undefined, tray support will be disabled
+; NOTE: A center aligned tray will cover center aligned modules
+;
+; Available positions:
+;   left
+;   center
+;   right
+tray-position = left
+
+; If true, the bar will not shift its
+; contents when the tray changes
+tray-detached = false 
+
+; Tray icon max size
+tray-maxsize = 16
+
+; Enable pseudo transparency
+; Will automatically be enabled if a fully transparent
+; background color is defined using `tray-background`
+;tray-transparent = true
+
+; Background color for the tray container
+; By default the tray container will use the bar
+; background color.
+; Note: 32 bit alpha blending is not supported.
+tray-background = ${colors.background}
+
+; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 0
+tray-offset-y = 0
+
+; Pad the sides of each tray icon
+tray-padding = 0
+
+; Scale factor for tray clients
+tray-scale = 1.0
+
+; Restack the bar window and put it above the
+; selected window manager's root
+;
+; Fixes the issue where the bar is being drawn
+; on top of fullscreen window's
+;
+; Currently supported WM's:
+;   bspwm
+;   i3 (requires: `override-redirect = true`)
+wm-restack = i3
+override-redirect = false   ; true - all windows cover the bar
 
 
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+; Enable support for inter-process messaging
+; See the Messaging wiki page for more details.
+;enable-ipc = false
 
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
-
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
-
-mode "resize" {
-
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
-
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode "resize"
-
-new_window pixel 0
-new_float normal  0
-
-# class                 border  backgr. text    indicator child_border
-client.focused          #65C9ED #65C9ED #C0E9F8 #041A22	  #041A22
-client.focused_inactive #041A22 #041A22 #FFFFFF #041A22   #041A22 
-client.unfocused        #041A22 #041A22 #C0E9F8 #041A22   #041A22 
-client.urgent           #041A22 #041A22 #C0E9F8 #041A22   #041A22 
-client.placeholder      #041A22 #041A22 #C0E9F8 #041A22   #041A22
+; Fallback click handlers that will be called if
+; there's no matching module handler found.
+;click-left = 
+;click-middle = 
+;click-right =
+scroll-up = i3wm-desknext
+scroll-down = i3wm-deskprev
+;double-click-left =
+;double-click-middle =
+;double-click-right =
 
 
 
+[bar/secondary]
+inherit = bar/main
+MONITOR = ${xrandr -q | grep 'HDMI1\|VGA-1' | cut -d ' ' -f1}
+monitor = ${env:MONITOR:HDMI1}
 
 
 
+[module/xkeyboard]
+format-prefix =
+format-prefix-foreground = ${colors.foreground-alt}
+;format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+;label-layout-underline = ${colors.foreground-alt}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+;label-indicator-underline = ${colors.secondary}
+
+;[module/filesystem]
+;type = internal/fs
+;interval = 25
+;
+;mount-0 = /
+;
+;label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+;label-unmounted = %mountpoint% not mounted
+;label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+;Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>     <icon-prev>     <toggle>     <icon-next>      <icon-stop>  
+
+icon-prev = ◀
+icon-prev-foreground = ${colors.foreground-alt}
+icon-stop = ✖
+icon-stop-foreground = ${colors.foreground-alt}
+icon-play = >
+icon-play-foreground = ${colors.foreground-alt}
+icon-pause = ≯
+icon-pause-foreground = ${colors.foreground-alt}
+icon-next = ▶
+icon-next-foreground = ${colors.foreground-alt}
+
+label-song-maxlen = 50
+label-song-ellipsis = true
+
+[module/xbacklight]
+type = internal/xbacklight
+;format = <label>
+format = <bar>
+;label = BL 
+bar-width = 10
+bar-indicator = »«
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = -
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = -
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "CPU"
+format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #f90000
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "MEMORY"
+format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #4bffdc
+label = %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+;format-connected-underline = #9f78e1
+label-connected = %essid%
+
+;format-disconnected =
+;format-disconnected = test<label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %ifname% disconnected
+label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 =
+ramp-signal-1 =
+ramp-signal-2 =
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+
+[module/eth]
+type = internal/network
+interface = virbr0-nic
+interval = 3.0
+
+;format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 2
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M
+time-alt = 
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #4D504E
+
+label = %date% %time%
+
+[module/volume]
+type = internal/volume
+
+format-volume = <label-volume> <bar-volume>
+label-volume = 
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix =
+format-muted-foreground = ${colors.foreground-alt}
+label-muted =  muted 
+  
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = »«
+bar-volume-indicator-font = 2
+bar-volume-fill = -
+bar-volume-fill-font = 2
+bar-volume-empty = -
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ADP1
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #ffb52a
+
+format-discharging = <ramp-capacity> <label-discharging>
+;format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = "BAT"
+format-full-prefix-foreground = ${colors.foreground-alt}
+;format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = BAT
+ramp-capacity-1 = BAT
+ramp-capacity-2 = BAT
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = BAT
+animation-charging-1 = BAT
+animation-charging-2 = BAT
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 1500
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+;format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = I  
+ramp-1 = DONT
+ramp-2 = KNOW
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 2
+
+label-open = I/O
+label-open-foreground = ${colors.foreground-alt}
+label-close = Cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = Reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = Power Off
+menu-0-1-exec = menu-open-2
+menu-0-2 = Suspend
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = Cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = Reboot
+menu-1-1-exec = reboot 
+menu-1-2 = <<<<<<
+menu-1-2-exec = 
 
 
+menu-2-0 = Power Off
+menu-2-0-exec = shutdown now 
+menu-2-1 = Cancel
+menu-2-1-exec = menu-open-0
+menu-2-2 = <<<<<<
+menu-2-2-exec = 
 
+menu-3-0 = >>>>>>
+menu-3-0-exec = 
+menu-3-1 = Suspend
+menu-3-1-exec = i3-msg exit
+menu-3-2 = Cancel
+menu-3-2-exec = menu-open-0
 
+[settings]
+screenchange-reload = true
+compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
 
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini
